@@ -1,5 +1,4 @@
-import { ProFormText, StepsForm } from '@ant-design/pro-components';
-import { Modal } from 'antd';
+import { ModalForm, ProFormText } from '@ant-design/pro-components';
 import React from 'react';
 
 export interface FormValueType extends Partial<any> {
@@ -17,72 +16,56 @@ export interface UpdateFormProps {
 }
 
 const UpdateForm: React.FC<UpdateFormProps> = (props) => (
-  <StepsForm
-    stepsProps={{
-      size: 'small',
+  <ModalForm
+    title="Edit"
+    width={420}
+    modalProps={{
+      destroyOnClose: true,
+      onCancel: () => props.onCancel(),
     }}
-    stepsFormRender={(dom, submitter) => {
-      return (
-        <Modal
-          width={640}
-          bodyStyle={{ padding: '32px 40px 48px' }}
-          destroyOnClose
-          title="Edit"
-          open={props.updateModalVisible}
-          footer={submitter}
-          onCancel={() => props.onCancel()}
-        >
-          {dom}
-        </Modal>
-      );
-    }}
+    initialValues={props.values}
     onFinish={props.onSubmit}
+    open={props.updateModalVisible}
   >
-    <StepsForm.StepForm
-      initialValues={{
-        _id: props.values._id,
-        name: props.values.name,
-        level: props.values.level,
-        position: props.values.position,
-      }}
-    >
-      <ProFormText name="_id" hidden />
-      <ProFormText
-        width="md"
-        name="name"
-        label="Name"
-        rules={[{ required: true, message: 'Required!' }]}
-      />
-      <ProFormText
-        width="md"
-        name="level"
-        label="Level"
-        rules={[{ required: true, message: 'Required!' }]}
-      />
-      <ProFormText
-        width="md"
-        name="position"
-        label="Position"
-        rules={[{ required: true, message: 'Required!' }]}
-      />
-    </StepsForm.StepForm>
-
+    <ProFormText name="_id" hidden />
+    <ProFormText
+      width="md"
+      name="name"
+      label="Name"
+      rules={[{ required: true, message: 'Required!' }]}
+    />
+    <ProFormText
+      width="md"
+      name="position"
+      label="Position"
+      rules={[{ required: true, message: 'Required!' }]}
+    />
+    <ProFormText
+      width="md"
+      name="level"
+      label="Level"
+      rules={[{ required: true, message: 'Required!' }]}
+    />
     {/* <ProFormRadio.Group
-        name="type"
+        name="level"
         width="md"
-        label="规则类型"
+        label="Level"
         options={[
           {
-            value: '0',
-            label: '强',
+            value: 'INTERN',
+            label: 'Intern',
           },
           {
-            value: '1',
-            label: '弱',
+            value: 'JUNIOR',
+            label: 'Junior',
+          },
+          {
+            value: 'SENIOR',
+            label: 'Senior',
           },
         ]}
       /> */}
-  </StepsForm>
+  </ModalForm>
 );
 
 export default UpdateForm;

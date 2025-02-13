@@ -5,11 +5,11 @@ import {
   createIntl,
   IntlShape,
   MessageDescriptor,
-} from 'D:/code/sesotec/MERN_APP/frontend/node_modules/@umijs/plugins/node_modules/react-intl';
+} from 'D:/code/sesotec/New folder (2)/MERN_APP/frontend/node_modules/@umijs/plugins/node_modules/react-intl';
 import { getPluginManager } from '../core/plugin';
-import EventEmitter from 'D:/code/sesotec/MERN_APP/frontend/node_modules/event-emitter';
+import EventEmitter from 'D:/code/sesotec/New folder (2)/MERN_APP/frontend/node_modules/event-emitter';
 // @ts-ignore
-import warning from 'D:/code/sesotec/MERN_APP/frontend/node_modules/warning';
+import warning from 'D:/code/sesotec/New folder (2)/MERN_APP/frontend/node_modules/warning';
 
 export {
   createIntl,
@@ -34,7 +34,7 @@ export {
   defineMessages,
   injectIntl,
   useIntl,
-} from 'D:/code/sesotec/MERN_APP/frontend/node_modules/@umijs/plugins/node_modules/react-intl';
+} from 'D:/code/sesotec/New folder (2)/MERN_APP/frontend/node_modules/@umijs/plugins/node_modules/react-intl';
 
 let g_intl: IntlShape;
 

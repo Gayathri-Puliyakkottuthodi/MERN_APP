@@ -3,7 +3,7 @@
 import {
   IntlCache,
   createIntl,
-} from 'D:/code/sesotec/MERN_APP/frontend/node_modules/@umijs/plugins/node_modules/react-intl';
+} from 'D:/code/sesotec/New folder (2)/MERN_APP/frontend/node_modules/@umijs/plugins/node_modules/react-intl';
 type OptionalIntlConfig = Omit<Parameters<typeof createIntl>[0], 'locale' | 'defaultLocale'>;
 export interface IRuntimeConfig {
     locale?: {

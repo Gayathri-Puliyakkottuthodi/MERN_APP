@@ -9,7 +9,7 @@ export async function getRoutes() {
     routes,
     routeComponents: {
 '1': React.lazy(() => import(/* webpackChunkName: "p__MongoRecords__index" */'@/pages/MongoRecords/index.tsx')),
-'ant-design-pro-layout': React.lazy(() => import(/* webpackChunkName: "umi__plugin-layout__Layout" */'D:/code/sesotec/MERN_APP/frontend/src/.umi/plugin-layout/Layout.tsx')),
+'ant-design-pro-layout': React.lazy(() => import(/* webpackChunkName: "umi__plugin-layout__Layout" */'D:/code/sesotec/New folder (2)/MERN_APP/frontend/src/.umi/plugin-layout/Layout.tsx')),
 },
   };
 }

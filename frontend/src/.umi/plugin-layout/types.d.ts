@@ -3,7 +3,7 @@
 /// <reference types="@ant-design/pro-components" />
 /// <reference types="antd" />
 
-    import type { ProLayoutProps, HeaderProps } from "D:/code/sesotec/MERN_APP/frontend/node_modules/@ant-design/pro-components";
+    import type { ProLayoutProps, HeaderProps } from "D:/code/sesotec/New folder (2)/MERN_APP/frontend/node_modules/@ant-design/pro-components";
     import type InitialStateType from '@@/plugin-initialState/@@initialState';
            type InitDataType = ReturnType<typeof InitialStateType>;
         

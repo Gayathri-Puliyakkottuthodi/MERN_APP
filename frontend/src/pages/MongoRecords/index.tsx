@@ -1,8 +1,13 @@
 import { queryUserList } from '@/services/demo/UserController';
-import { PageContainer, ProTable } from '@ant-design/pro-components';
-import { Button, Divider, message } from 'antd';
+import {
+  ActionType,
+  PageContainer,
+  ProColumns,
+  ProTable,
+} from '@ant-design/pro-components';
+import { Button, Divider, message, Modal } from 'antd';
 import axios from 'axios';
-import React, { useRef, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import CreateForm from './components/CreateForm';
 import UpdateForm, { FormValueType } from './components/UpdateForm';
 
@@ -12,8 +17,59 @@ const MongoRecords: React.FC<unknown> = () => {
     useState<boolean>(false);
   const [stepFormValues, setStepFormValues] = useState({});
 
-  const actionRef = useRef<any>();
-  const columns: any = [
+  const actionRef = useRef<ActionType>();
+
+  const handleAddRecord = useCallback(async (newRecord: MongoAPI.UserInfo) => {
+    try {
+      await axios.post('http://localhost:5050/api/records', newRecord);
+
+      message.success('Record added successfully!');
+    } catch (error) {
+      console.error('Error adding record:', error);
+      message.error('Failed to add record');
+    }
+  }, []);
+
+  const handleUpdateRecord = useCallback(async (fields: FormValueType) => {
+    try {
+      await axios.patch(`http://localhost:5050/api/records/${fields._id}`, {
+        name: fields.name || '',
+        level: fields.level || '',
+        position: fields.position || '',
+      });
+      message.success('Record updated successfully!');
+    } catch (error) {
+      console.error('Error updating record:', error);
+      message.error('Failed to update record');
+    }
+  }, []);
+
+  const handleDeleteRecord = useCallback(
+    async (id: MongoAPI.UserInfo['_id']) => {
+      Modal.confirm({
+        title: 'Are you sure you want to delete this record?',
+        content: 'This action cannot be undone.',
+        okText: 'Yes, Delete',
+        okType: 'danger',
+        cancelText: 'Cancel',
+        onOk: async () => {
+          try {
+            await axios.delete(`http://localhost:5050/api/records/${id}`);
+            if (actionRef.current) {
+              actionRef.current.reload();
+            }
+            message.success('Record deleted successfully!');
+          } catch (error) {
+            console.error('Error deleting record:', error);
+            message.error('Failed to delete record');
+          }
+        },
+      });
+    },
+    [],
+  );
+
+  const columns: ProColumns<MongoAPI.UserInfo, 'text'>[] = [
     {
       title: 'Name',
       dataIndex: 'name',
@@ -52,14 +108,14 @@ const MongoRecords: React.FC<unknown> = () => {
     },
     {
       title: 'Action',
+      width: 120,
+      align: 'right',
       dataIndex: 'action',
-      valueType: 'action',
+      search: false,
       render: (_: any, record: any) => (
         <>
           <a
             onClick={() => {
-              console.log({ record });
-
               handleUpdateModalVisible(true);
               setStepFormValues(record);
             }}
@@ -67,49 +123,11 @@ const MongoRecords: React.FC<unknown> = () => {
             Edit
           </a>
           <Divider type="vertical" />
-          <a onClick={() => handleDeleteRecord(record)}>Delete</a>
+          <a onClick={() => handleDeleteRecord(record?._id)}>Delete</a>
         </>
       ),
     },
   ];
-
-  const handleAddRecord = async (newRecord: any) => {
-    try {
-      await axios.put('http://localhost:5050/api/records', newRecord);
-
-      message.success('Record added successfully!');
-    } catch (error) {
-      console.error('Error adding record:', error);
-      message.error('Failed to add record');
-    }
-  };
-
-  const handleUpdateRecord = async (fields: FormValueType) => {
-    try {
-      await axios.patch(`http://localhost:5050/api/records/${fields._id}`, {
-        name: fields.name || '',
-        level: fields.level || '',
-        position: fields.position || '',
-      });
-      message.success('Record updated successfully!');
-    } catch (error) {
-      console.error('Error updating record:', error);
-      message.error('Failed to update record');
-    }
-  };
-
-  const handleDeleteRecord = async (fields: FormValueType) => {
-    try {
-      await axios.delete(`http://localhost:5050/api/records/${fields._id}`);
-      if (actionRef.current) {
-        actionRef.current.reload();
-      }
-      message.success('Record deleted successfully!');
-    } catch (error) {
-      console.error('Error deleting record:', error);
-      message.error('Failed to delete record');
-    }
-  };
 
   return (
     <PageContainer
@@ -117,7 +135,7 @@ const MongoRecords: React.FC<unknown> = () => {
         title: 'Mongo data',
       }}
     >
-      <ProTable<any>
+      <ProTable<MongoAPI.UserInfo>
         headerTitle="CRUD operations"
         actionRef={actionRef}
         rowKey="_id"
@@ -161,7 +179,7 @@ const MongoRecords: React.FC<unknown> = () => {
         onCancel={() => handleModalVisible(false)}
         modalVisible={createModalVisible}
       >
-        <ProTable<API.UserInfo, API.UserInfo>
+        <ProTable<MongoAPI.UserInfo, MongoAPI.UserInfo>
           onSubmit={async (value) => {
             await handleAddRecord(value);
             handleModalVisible(false);
@@ -171,7 +189,7 @@ const MongoRecords: React.FC<unknown> = () => {
           }}
           rowKey="id"
           type="form"
-          columns={columns}
+          columns={columns.filter((col) => col.title !== 'Action')}
         />
       </CreateForm>
       {stepFormValues && Object.keys(stepFormValues).length ? (

@@ -11,7 +11,7 @@ import {
 import React, { useMemo } from 'react';
 import {
   ProLayout,
-} from "D:/code/sesotec/MERN_APP/frontend/node_modules/@ant-design/pro-components";
+} from "D:/code/sesotec/New folder (2)/MERN_APP/frontend/node_modules/@ant-design/pro-components";
 import './Layout.css';
 import Logo from './Logo';
 import Exception from './Exception';

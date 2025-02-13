@@ -155,7 +155,6 @@ const MongoRecords: React.FC<unknown> = () => {
           try {
             const res = await queryUserList({
               ...params,
-              // FIXME: remove @ts-ignore
               // @ts-ignore
               sorter,
               filter,

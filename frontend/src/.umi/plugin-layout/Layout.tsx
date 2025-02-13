@@ -123,6 +123,7 @@ export default (props: any) => {
       }}
       formatMessage={userConfig.formatMessage || formatMessage}
       menu={{ locale: userConfig.locale }}
+      logo={null}
       menuItemRender={(menuItemProps, defaultDom) => {
         if (menuItemProps.isUrl || menuItemProps.children) {
           return defaultDom;

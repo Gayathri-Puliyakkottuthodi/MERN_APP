@@ -4,11 +4,12 @@
 import React from 'react';
 
 export async function getRoutes() {
-  const routes = {"1":{"name":"Mongodb records","path":"/MongoRecords","parentId":"ant-design-pro-layout","id":"1"},"ant-design-pro-layout":{"id":"ant-design-pro-layout","path":"/","isLayout":true}} as const;
+  const routes = {"1":{"name":"Resume","path":"/home","parentId":"ant-design-pro-layout","id":"1"},"2":{"name":"MEAN CRUD","path":"/MongoRecords","parentId":"ant-design-pro-layout","id":"2"},"ant-design-pro-layout":{"id":"ant-design-pro-layout","path":"/","isLayout":true}} as const;
   return {
     routes,
     routeComponents: {
-'1': React.lazy(() => import(/* webpackChunkName: "p__MongoRecords__index" */'@/pages/MongoRecords/index.tsx')),
+'1': React.lazy(() => import(/* webpackChunkName: "p__Home__index" */'@/pages/Home/index.tsx')),
+'2': React.lazy(() => import(/* webpackChunkName: "p__MongoRecords__index" */'@/pages/MongoRecords/index.tsx')),
 'ant-design-pro-layout': React.lazy(() => import(/* webpackChunkName: "umi__plugin-layout__Layout" */'D:/code/sesotec/New folder (2)/MERN_APP/frontend/src/.umi/plugin-layout/Layout.tsx')),
 },
   };

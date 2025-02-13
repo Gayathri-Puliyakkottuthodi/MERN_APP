@@ -19,7 +19,6 @@ import {
 import { useMemo } from 'react';
 import Exception from './Exception';
 import './Layout.css';
-import Logo from './Logo';
 import { getRightRenderContent } from './rightRender';
 import { ProLayout } from 'D:/code/sesotec/New folder (2)/MERN_APP/frontend/node_modules/@ant-design/pro-components';
 
@@ -55,7 +54,6 @@ const mapRoutes = (routes: IRoute[]) => {
     return [];
   }
   return routes.map((route) => {
-    // 需要 copy 一份, 否则会污染原始数据
     const newRoute = { ...route };
     if (route.originPath) {
       newRoute.path = route.originPath;
@@ -125,7 +123,6 @@ export default (props: any) => {
       }}
       formatMessage={userConfig.formatMessage || formatMessage}
       menu={{ locale: userConfig.locale }}
-      logo={Logo}
       menuItemRender={(menuItemProps, defaultDom) => {
         if (menuItemProps.isUrl || menuItemProps.children) {
           return defaultDom;

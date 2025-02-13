@@ -10,20 +10,20 @@ export default defineConfig({
     title: '@umijs/max',
   },
   locale: {
-    default: 'en-US', 
+    default: 'en-US',
     antd: true,
-    baseNavigator: false, 
+    baseNavigator: false,
   },
   routes: [
     // {
     //   path: '/',
     //   redirect: '/home',
     // },
-    // {
-    //   name: "Home",
-    //   path: '/home',
-    //   component: './Home',
-    // },
+    {
+      name: 'Resume',
+      path: '/home',
+      component: './Home',
+    },
     // {
     //   name: "Access",
     //   path: '/access',
@@ -35,11 +35,10 @@ export default defineConfig({
     //   component: './Table',
     // },
     {
-      name: "Mongodb records",
+      name: 'MEAN CRUD',
       path: '/MongoRecords',
       component: '@/pages/MongoRecords',
     },
   ],
   npmClient: 'npm',
 });
-

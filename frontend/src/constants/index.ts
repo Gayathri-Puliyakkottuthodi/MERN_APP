@@ -47,7 +47,7 @@ export const EXPERIENCES = [
       'mySQL',
       'NoSQL',
       'Python',
-      'REST APIF',
+      'REST API',
     ],
   },
   {

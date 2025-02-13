@@ -50,3 +50,7 @@
 .umi-plugin-layout-name.umi-plugin-layout-hide-avatar-img {
   margin-left: 0;
 }
+
+.ant-pro-layout .ant-pro-sider-logo >a >img {
+  display: 'none';
+}

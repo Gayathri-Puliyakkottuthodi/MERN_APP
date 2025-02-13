@@ -1,0 +1,9 @@
+touch .gitignore
+echo "node_modules/" >> .gitignore
+echo "server/node_modules/" >> .gitignore
+echo "frontend/node_modules/" >> .gitignore
+echo ".cache/" >> .gitignore
+echo ".env" >> .gitignore
+git add .gitignore
+git commit -m "Added .gitignore"
+git push origin main
